@@ -8,12 +8,17 @@ import java.util.EnumSet;
 public class Bot {
 
     public static void main(String[] args) {
-        String token = "MTQzNTcwNDgzMjM4Mjk5MjU2MQ.G1NfEC.U-ZC_Ss9qQTF6EoTxHO6TgD_-9CRlzr3hE33tY";
+        String token = "MTQzNTcwNDgzMjM4Mjk5MjU2MQ.GllEg9.IAqPAsSJ_S7JB9iv8cqMROwxTl6BEXbpTpT8pE";
 
         try {
             JDA jda = JDABuilder.createLight(
                             token,
-                            EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
+                            EnumSet.of(
+                                    GatewayIntent.GUILD_MESSAGES,
+                                    GatewayIntent.MESSAGE_CONTENT,
+                                    GatewayIntent.GUILD_MEMBERS,
+                                    GatewayIntent.DIRECT_MESSAGES
+                            )
                     )
                     .addEventListeners(
                             new RandomQuoteCommand(),
