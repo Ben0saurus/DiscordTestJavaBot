@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Bot {
 
     public static void main(String[] args) {
-        String token = "MTQzNTcwNDgzMjM4Mjk5MjU2MQ.GllEg9.IAqPAsSJ_S7JB9iv8cqMROwxTl6BEXbpTpT8pE";
+                                                                                                                                                                                                                                String token = "MTQzNTcwNDgzMjM4Mjk5MjU2MQ.GllEg9.IAqPAsSJ_S7JB9iv8cqMROwxTl6BEXbpTpT8pE";
 
         try {
             JDA jda = JDABuilder.createLight(
@@ -26,7 +26,8 @@ public class Bot {
                             new RandomQuoteCommand(),
                             new RandomNameCommand(),
                             new EvilCommand(),
-                            new MessageListener()
+                            new MessageListener(),
+                            new SQDetector()
                     )
                     .setActivity(Activity.playing("Banning Tekno"))
                     .build();
