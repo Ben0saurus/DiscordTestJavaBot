@@ -30,11 +30,11 @@ public class MessageListener extends ListenerAdapter {
 
         }
 
-        if (message.contains("67") || message.contains("6 7")) {
+        /*if (message.contains("67") || message.contains("6 7")) {
 
             event.getChannel().sendMessage("SAU BAY").queue();
 
-        }
+        } */
 
 
         System.out.println(logEntry);

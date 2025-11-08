@@ -1,8 +1,10 @@
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import java.util.EnumSet;
+import java.util.Scanner;
 
 public class Bot {
 
@@ -30,6 +32,30 @@ public class Bot {
                     .build();
 
             jda.awaitReady();
+
+
+            Scanner scanner = new Scanner(System.in);
+            String channelId = "1436296079636434944";
+            TextChannel channel = jda.getTextChannelById(channelId);
+
+            if (channel == null) {
+                System.out.println("Channel not found! Check the ID.");
+                return;
+            }
+
+            System.out.println("Bot is ready! Type messages below to send as the bot:");
+
+            while (true) {
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("exit")) {
+                    System.out.println("Shutting down...");
+                    jda.shutdown();
+                    break;
+                }
+
+                channel.sendMessage(input).queue();
+            }
+
 
             String guildId1 = "1418570459188039751";
             String guildId2 = "1420362494282825771";
