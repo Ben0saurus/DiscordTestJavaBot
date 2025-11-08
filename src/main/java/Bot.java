@@ -2,7 +2,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-
 import java.util.EnumSet;
 
 public class Bot {
@@ -17,7 +16,8 @@ public class Bot {
                                     GatewayIntent.GUILD_MESSAGES,
                                     GatewayIntent.MESSAGE_CONTENT,
                                     GatewayIntent.GUILD_MEMBERS,
-                                    GatewayIntent.DIRECT_MESSAGES
+                                    GatewayIntent.DIRECT_MESSAGES,
+                                    GatewayIntent.GUILD_VOICE_STATES
                             )
                     )
                     .addEventListeners(

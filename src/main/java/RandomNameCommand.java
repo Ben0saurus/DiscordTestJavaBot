@@ -8,11 +8,15 @@ import java.util.Random;
 
 public class RandomNameCommand extends ListenerAdapter {
 
-    private final String[] names = {"chicken car", "chicken jackson", "chips", "june", "junesies", "july", "jujus", "ai chatbot", "spammer", "ItsDumzy", "Blueprint", "Sharky", "waffle alt", "feesh", "", "oTeknoVA",
-            "Spammer", "aNifty", "Donald Trump", "sam the fr*nch", "duoble suicide", "blueprintist", "doomscroller", "hells customer service", "34 Felonys", "Elon Musk", "Zohran Mamdani", "Shrimpcraftian", "Teknosaurus", "salsarata"
-            , "YUM", "angel", "bald", "Izzy", "femboylover66", "Benosita", "Benita", "Melonarta", "WATCH STARWARS", ":3", "honey", "Bumno", "stew", "SQ", "emoaurafarmingclankerfemboy67", "lil machi", "stove", "mochi", "LasVegasTV", "ohnepixel",
+    private final String[] names = {"chicken car", "chicken jackson", "chips", "june", "junesies", "july", "jujus", "ai chatbot", "spammer", "ItsDumzy",
+            "Blueprint", "Sharky", "waffle alt", "feesh", "", "oTeknoVA",
+            "Spammer", "aNifty", "Donald Trump", "sam the fr*nch", "duoble suicide", "blueprintist", "doomscroller", "hells customer service", "34 Felonys",
+            "Elon Musk", "Zohran Mamdani", "Shrimpcraftian", "Teknosaurus", "salsarata"
+            , "YUM", "angel", "bald", "Izzy", "femboylover66", "Benosita", "Benita", "Melonarta", "WATCH STARWARS", ":3", "honey", "Bumno", "stew", "SQ",
+            "emoaurafarmingclankerfemboy67", "lil machi", "stove", "mochi", "LasVegasTV", "ohnepixel",
             "waffle cult member", "jujuice", "grince the unc", "Raj", "Tekno Scammerman", "sam the green", "sam the green frenchie", "YOU", "dojulymeee_12",
-            "biceps lover", "dominant french mommy", "what the sigma", "Sau Bay", "Steve", "my munchkin", "Moldarta", "Sapscream", "lore gooner", "gooning to lore", "julstein"};
+            "biceps lover", "dominant french mommy", "what the sigma", "Sau Bay", "Steve", "my munchkin", "Moldarta", "Sapscream", "lore gooner", "gooning to lore",
+            "julstein", "fishenstein", "unc", "fishbowlian", "tree climber"};
 
     private final Random random = new Random();
 
