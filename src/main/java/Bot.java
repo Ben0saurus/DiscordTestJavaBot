@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Bot {
 
     public static void main(String[] args) {
-                                                                                                                                                                                                                                String token = "MTQzNTcwNDgzMjM4Mjk5MjU2MQ.GllEg9.IAqPAsSJ_S7JB9iv8cqMROwxTl6BEXbpTpT8pE";
+                                                                                                                                                                                                             String token = "ADD TOKEN HERE";
 
         try {
             JDA jda = JDABuilder.createLight(
@@ -26,10 +26,10 @@ public class Bot {
                             new RandomQuoteCommand(),
                             new RandomNameCommand(),
                             new EvilCommand(),
-                            new MessageListener(),
-                            new SQDetector()
+                            new MessageListener()
+                            //new SQDetector()
                     )
-                    .setActivity(Activity.playing("Banning Tekno"))
+                    .setActivity(Activity.playing("Eating cucumbers"))
                     .build();
 
             jda.awaitReady();
@@ -57,29 +57,13 @@ public class Bot {
                 channel.sendMessage(input).queue();
             }
 
-
-            String guildId1 = "1418570459188039751";
-            String guildId2 = "1420362494282825771";
-
-            jda.getGuildById(guildId1)
-                    .updateCommands()
+            jda.updateCommands()
                     .addCommands(
                             RandomQuoteCommand.getCommandData(),
                             RandomNameCommand.getCommandData(),
                             EvilCommand.getCommandData()
                     )
                     .queue();
-
-            if (!guildId2.equals(guildId1)) {
-                jda.getGuildById(guildId2)
-                        .updateCommands()
-                        .addCommands(
-                                RandomQuoteCommand.getCommandData(),
-                                RandomNameCommand.getCommandData(),
-                                EvilCommand.getCommandData()
-                        )
-                        .queue();
-            }
 
             System.out.println("Commands registered successfully.");
 
