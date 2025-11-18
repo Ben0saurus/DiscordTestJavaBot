@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Bot {
 
     public static void main(String[] args) {
-                                                                                                                                                                                                             String token = "ADD TOKEN HERE";
+                                                                                                                                                                                                             String token = "TOKEN HERE";
 
         try {
             JDA jda = JDABuilder.createLight(
@@ -33,6 +33,10 @@ public class Bot {
                     .build();
 
             jda.awaitReady();
+
+
+            WaterDrops rms = new WaterDrops(jda, 1418570459188039754L);
+            rms.start();
 
 
             Scanner scanner = new Scanner(System.in);

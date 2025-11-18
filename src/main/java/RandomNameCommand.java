@@ -16,8 +16,7 @@ public class RandomNameCommand extends ListenerAdapter {
             "emoaurafarmingclankerfemboy67", "lil machi", "stove", "mochi", "LasVegasTV", "ohnepixel",
             "waffle cult member", "jujuice", "grince the unc", "Raj", "Tekno Scammerman", "sam the green", "sam the green frenchie", "YOU", "dojulymeee_12",
             "biceps lover", "dominant french mommy", "what the sigma", "Sau Bay", "Steve", "my munchkin", "Moldarta", "Sapscream", "lore gooner", "gooning to lore",
-            "julstein", "fishenstein", "unc", "fishbowlian", "tree climber"};
-
+            "julstein", "fishenstein", "unc", "fishbowlian", "tree climber", "just krystal"};
     private final Random random = new Random();
 
     public static CommandData getCommandData() {
