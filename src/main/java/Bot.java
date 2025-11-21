@@ -35,8 +35,10 @@ public class Bot {
             jda.awaitReady();
 
 
-            WaterDrops rms = new WaterDrops(jda, 1418570459188039754L);
+            WaterDrops rms = new WaterDrops(jda, 1418570459188039754L, "Waterdrop", "Fish", 40, 300);
+            WaterDrops rms2 = new WaterDrops(jda, 1437423417576915024L, "Piece of Disc", "July", 67, 670);
             rms.start();
+            rms2.start();
 
 
             Scanner scanner = new Scanner(System.in);

@@ -1,10 +1,11 @@
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.channel.Channel;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -20,12 +21,26 @@ public class WaterDrops extends ListenerAdapter {
 
     private String currentWord = null;
     private boolean activeDrop = false;
-    private boolean isExpired = true;
 
-    public WaterDrops(JDA jda, long channelId) {
+    private final String name;
+    private final String user;
+    private final int chance2;
+    private final int chance1;
+
+    private final File cardsFolder = new File("cards");
+
+    private final String[] wordList2 = {
+            "dojulymeee_12", "esoptro", "nemoeries", "ollay__", "oteknova",
+            "samguns.999", "sto_machi"
+    };
+
+    public WaterDrops(JDA jda, long channelId, String name, String user, int chance1, int chance2) {
         this.jda = jda;
         this.channelId = channelId;
-
+        this.name = name;
+        this.user = user;
+        this.chance2 = chance2;
+        this.chance1 = chance1;
         jda.addEventListener(this);
     }
 
@@ -33,26 +48,12 @@ public class WaterDrops extends ListenerAdapter {
         scheduleNextDrop();
     }
 
-    private final String[] wordList = {
-            "benosaurus9", "ollay__", "oteknova", "sto_machi", "sleepy.j.c", "geumyume", "syrinxic",
-            "xzhiyun", "dojulymeee_12", "my_dad_left_4_years_ago", "termitenus", "esoptro",
-            "alittleaxolotl", "hun3ydew", "xiqp_qp", "staffsargent_cornflakes", "micah1._.",
-            "nimbasa.", "imrubberduckyy", "nemoeries", "chihscake", "venzuus", "arroz.con.1eche",
-            "lasvegastv", "hoot312", "awesomejett44", "korb.ii", "chazzylive", "lynzcan0n_",
-            "samguns.999", "knaazs", "duoblesuicide", "aprilsthings", "queenieizzy", "malikalmalika",
-            "shoonlw", "sharky", "microplastic", "oil spill", "fisch", "pacific", "atlantic", "indian",
-            "southern", "arctic", "salmon", "sushi", "chips", "crab", "catfish", "seapickle", "blobfish",
-            "french fish"
-    };
-
-
     private void scheduleNextDrop() {
 
-        long delay = 40 + random.nextInt(400);
+        long delay = chance1 + random.nextInt(chance2);
 
         scheduler.schedule(() -> {
 
-            // Do not override an active drop
             if (activeDrop) {
                 scheduleNextDrop();
                 return;
@@ -64,24 +65,44 @@ public class WaterDrops extends ListenerAdapter {
                 return;
             }
 
-            // Pick the new word at drop time
-            currentWord = wordList[random.nextInt(wordList.length)];
+            currentWord = wordList2[random.nextInt(wordList2.length)];
 
-            channel.sendMessage("Fish has dropped a Waterdrop! Type **" + currentWord +
-                    "** first to get it!").queue();
+            File[] files = cardsFolder.listFiles((dir, name) ->
+                    name.matches(".*\\.(png|jpg|jpeg|gif)$")
+            );
+
+            boolean found = false;
+
+            if (files != null) {
+                for (File file : files) {
+                    if (file.getName().contains(currentWord)) {
+
+                        channel.sendMessage(user + " has dropped a " + name +
+                                        "! Type **" + currentWord + "** first to get it!")
+                                .addFiles(FileUpload.fromData(file))
+                                .queue();
+
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!found) {
+                channel.sendMessage(user + " has dropped a " + name +
+                        "! Type **" + currentWord + "** first to get it!").queue();
+            }
 
             activeDrop = true;
 
-            // Auto-expire after 120 seconds
             scheduler.schedule(() -> {
                 if (activeDrop) {
                     activeDrop = false;
-                    jda.getTextChannelById(channelId).sendMessage("Noone typed the word " + currentWord + " quickly enough. Better luck next time!").queue();
                     currentWord = null;
+                    channel.sendMessage("No one typed the word in time. Better luck next drop!").queue();
                 }
             }, 120, TimeUnit.SECONDS);
 
-            // Schedule the next drop
             scheduleNextDrop();
 
         }, delay, TimeUnit.MINUTES);
@@ -101,12 +122,10 @@ public class WaterDrops extends ListenerAdapter {
             storage.addWord(event.getAuthor().getId(), currentWord);
 
             event.getChannel().sendMessage(event.getAuthor().getAsMention() +
-                            " was the **first** to catch the Waterdrop! They now own `" + currentWord + "`.")
-                    .queue();
+                    " was the **first** to catch the "+ name + "! They now own `" + currentWord + "`.").queue();
 
             activeDrop = false;
             currentWord = null;
         }
-
     }
 }
