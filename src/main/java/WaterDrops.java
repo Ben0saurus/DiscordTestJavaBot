@@ -31,7 +31,7 @@ public class WaterDrops extends ListenerAdapter {
 
     private final String[] wordList2 = {
             "dojulymeee_12", "esoptro", "nemoeries", "ollay__", "oteknova",
-            "samguns.999", "sto_machi"
+            "samguns.999", "sto_machi", "sleepy.j.c"
     };
 
     public WaterDrops(JDA jda, long channelId, String name, String user, int chance1, int chance2) {

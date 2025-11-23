@@ -40,6 +40,13 @@ public class MessageListener extends ListenerAdapter {
             }
         }
 
+        if (message.contains("mamdani")) {
+
+            File file = new File("zohran/img.png");
+            event.getChannel().sendFiles(FileUpload.fromData(file)).queue();
+
+        }
+
 
 
         /* if (messageCount == 67) {

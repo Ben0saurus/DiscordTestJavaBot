@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class Bot {
 
     public static void main(String[] args) {
-                                                                                                                                                                                                             String token = "TOKEN HERE";
+
+        String token = "TOKEN HERE";
+        long channelId = 1436296079636434944L;
 
         try {
             JDA jda = JDABuilder.createLight(
@@ -25,24 +27,42 @@ public class Bot {
                     .addEventListeners(
                             new RandomQuoteCommand(),
                             new RandomNameCommand(),
-                            new EvilCommand(),
-                            new MessageListener()
-                            //new SQDetector()
+                            //new EvilCommand(),
+                            new MessageListener(),
+                            new UploadQuoteCommand()
                     )
                     .setActivity(Activity.playing("Eating cucumbers"))
                     .build();
 
             jda.awaitReady();
 
+            jda.updateCommands()
+                    .addCommands(
+                            RandomQuoteCommand.getCommandData(),
+                            RandomNameCommand.getCommandData(),
+                            UploadQuoteCommand.getCommandData()
+                            //EvilCommand.getCommandData()
+                    )
+                    .queue();
 
-            WaterDrops rms = new WaterDrops(jda, 1418570459188039754L, "Waterdrop", "Fish", 40, 300);
-            WaterDrops rms2 = new WaterDrops(jda, 1437423417576915024L, "Piece of Disc", "July", 67, 670);
+            long guildId = 1420362494282825771L;
+            jda.getGuildById(guildId)
+                    .updateCommands()
+                    .addCommands(
+                            RandomQuoteCommand.getCommandData(),
+                            RandomNameCommand.getCommandData(),
+                            UploadQuoteCommand.getCommandData()
+                    )
+                    .queue();
+
+
+
+            WaterDrops rms = new WaterDrops(jda, 1418570459188039754L, "Waterdrop", "Fish", 20, 150);
+            WaterDrops rms2 = new WaterDrops(jda, 1437423417576915024L, "Piece of Disc", "July", 20, 250);
             rms.start();
             rms2.start();
 
-
             Scanner scanner = new Scanner(System.in);
-            String channelId = "1436296079636434944";
             TextChannel channel = jda.getTextChannelById(channelId);
 
             if (channel == null) {
@@ -59,19 +79,8 @@ public class Bot {
                     jda.shutdown();
                     break;
                 }
-
                 channel.sendMessage(input).queue();
             }
-
-            jda.updateCommands()
-                    .addCommands(
-                            RandomQuoteCommand.getCommandData(),
-                            RandomNameCommand.getCommandData(),
-                            EvilCommand.getCommandData()
-                    )
-                    .queue();
-
-            System.out.println("Commands registered successfully.");
 
         } catch (InterruptedException e) {
             e.printStackTrace();
