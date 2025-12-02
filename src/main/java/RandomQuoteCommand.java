@@ -14,7 +14,7 @@ public class RandomQuoteCommand extends ListenerAdapter {
         return Commands.slash("randomquote", "Send a random quote from the bot's folder");
     }
 
-    private final File quoteFolder = new File("images");
+    private final File quoteFolder = new File("quotes");
     private final Random random = new Random();
 
     @Override
